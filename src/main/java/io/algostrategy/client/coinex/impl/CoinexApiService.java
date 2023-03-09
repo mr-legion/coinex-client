@@ -3,6 +3,7 @@ package io.algostrategy.client.coinex.impl;
 import io.algostrategy.client.coinex.domain.Response;
 import io.algostrategy.client.coinex.domain.general.Asset;
 import io.algostrategy.client.coinex.domain.market.MarketInfo;
+import io.algostrategy.client.coinex.domain.market.MarketTickerResponse;
 import retrofit2.Call;
 import retrofit2.http.GET;
 
@@ -20,6 +21,9 @@ public interface CoinexApiService {
 
     // Market endpoints
 
-    @GET("v1/market/info")
+    @GET("/v1/market/info")
     Call<Response<Map<String, MarketInfo>>> getMarketInfo();
+
+    @GET("/v1/market/ticker/all")
+    Call<Response<MarketTickerResponse>> getMarketTickers();
 }

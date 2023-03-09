@@ -5,6 +5,7 @@ import io.algostrategy.client.coinex.CoinexApiRestClient;
 import io.algostrategy.client.coinex.domain.Response;
 import io.algostrategy.client.coinex.domain.general.Asset;
 import io.algostrategy.client.coinex.domain.market.MarketInfo;
+import io.algostrategy.client.coinex.domain.market.MarketTickerResponse;
 import org.hamcrest.collection.IsMapWithSize;
 import org.junit.jupiter.api.Test;
 
@@ -30,5 +31,12 @@ public class CoinexApiRestClientImplTest {
         Response<Map<String, MarketInfo>> response = coinexApiRestClient.getMarketInfo();
         assertNotNull(response);
         assertThat(response.getData(), allOf(notNullValue(), is(not(IsMapWithSize.anEmptyMap()))));
+    }
+
+    @Test
+    public void getMarketTickers_ShouldReturnMarketTickers() {
+        Response<MarketTickerResponse> response = coinexApiRestClient.getMarketTickers();
+        assertNotNull(response);
+        assertThat(response.getData().getTickers(), allOf(notNullValue(), is(not(IsMapWithSize.anEmptyMap()))));
     }
 }
