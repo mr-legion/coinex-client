@@ -3,6 +3,7 @@ package io.algostrategy.client.coinex.impl;
 import io.algostrategy.client.coinex.CoinexApiRestClient;
 import io.algostrategy.client.coinex.domain.Response;
 import io.algostrategy.client.coinex.domain.general.Asset;
+import io.algostrategy.client.coinex.domain.market.MarketInfo;
 
 import java.util.Map;
 
@@ -22,5 +23,12 @@ public class CoinexApiRestClientImpl implements CoinexApiRestClient {
     @Override
     public Response<Map<String, Asset>> getAssets() {
         return CoinexApiServiceGenerator.executeSync(coinexApiService.getAssets());
+    }
+
+    // Market endpoints
+
+    @Override
+    public Response<Map<String, MarketInfo>> getMarketInfo() {
+        return CoinexApiServiceGenerator.executeSync(coinexApiService.getMarketInfo());
     }
 }

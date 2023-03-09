@@ -2,6 +2,7 @@ package io.algostrategy.client.coinex;
 
 import io.algostrategy.client.coinex.domain.Response;
 import io.algostrategy.client.coinex.domain.general.Asset;
+import io.algostrategy.client.coinex.domain.market.MarketInfo;
 
 import java.util.Map;
 import java.util.concurrent.CompletableFuture;
@@ -19,4 +20,13 @@ public interface CoinexApiAsyncRestClient {
      * @return assets
      */
     CompletableFuture<Response<Map<String, Asset>>> getAssets();
+
+    // Market endpoints
+
+    /**
+     * Get all supported markets (asynchronous).
+     *
+     * @return market info
+     */
+    CompletableFuture<Response<Map<String, MarketInfo>>> getMarketInfo();
 }
