@@ -5,6 +5,7 @@ import io.algostrategy.client.coinex.domain.Response;
 import io.algostrategy.client.coinex.domain.general.Asset;
 import io.algostrategy.client.coinex.domain.market.MarketInfo;
 import io.algostrategy.client.coinex.domain.market.MarketTickerResponse;
+import io.algostrategy.client.coinex.domain.market.OrderBook;
 
 import java.util.Map;
 import java.util.concurrent.CompletableFuture;
@@ -42,6 +43,13 @@ public class CoinexApiAsyncRestClientImpl implements CoinexApiAsyncRestClient {
     public CompletableFuture<Response<MarketTickerResponse>> getMarketTickers() {
         CompletableFuture<Response<MarketTickerResponse>> future = new CompletableFuture<>();
         coinexApiService.getMarketTickers().enqueue(new RetrofitCallbackAdapter<>(future));
+        return future;
+    }
+
+    @Override
+    public CompletableFuture<Response<OrderBook>> getOrderBook(String market, Integer limit, String aggLevel) {
+        CompletableFuture<Response<OrderBook>> future = new CompletableFuture<>();
+        coinexApiService.getOrderBook(market, limit, aggLevel).enqueue(new RetrofitCallbackAdapter<>(future));
         return future;
     }
 }

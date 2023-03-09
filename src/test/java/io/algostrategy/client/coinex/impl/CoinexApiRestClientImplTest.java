@@ -6,11 +6,13 @@ import io.algostrategy.client.coinex.domain.Response;
 import io.algostrategy.client.coinex.domain.general.Asset;
 import io.algostrategy.client.coinex.domain.market.MarketInfo;
 import io.algostrategy.client.coinex.domain.market.MarketTickerResponse;
+import io.algostrategy.client.coinex.domain.market.OrderBook;
 import org.hamcrest.collection.IsMapWithSize;
 import org.junit.jupiter.api.Test;
 
 import java.util.Map;
 
+import static io.algostrategy.client.coinex.constant.CoinexApiConstants.AGG_LEVEL_0;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
@@ -38,5 +40,13 @@ public class CoinexApiRestClientImplTest {
         Response<MarketTickerResponse> response = coinexApiRestClient.getMarketTickers();
         assertNotNull(response);
         assertThat(response.getData().getTickers(), allOf(notNullValue(), is(not(IsMapWithSize.anEmptyMap()))));
+    }
+
+    @Test
+    public void getOrderBook_ShouldReturnOrderBookForBTCUSDT() {
+        Response<OrderBook> response = coinexApiRestClient.getOrderBook("BTCUSDT", 50, AGG_LEVEL_0);
+        assertNotNull(response);
+        assertThat(response.getData().getAsks(), is(not(empty())));
+        assertThat(response.getData().getBids(), is(not(empty())));
     }
 }

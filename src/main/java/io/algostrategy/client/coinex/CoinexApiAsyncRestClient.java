@@ -4,6 +4,7 @@ import io.algostrategy.client.coinex.domain.Response;
 import io.algostrategy.client.coinex.domain.general.Asset;
 import io.algostrategy.client.coinex.domain.market.MarketInfo;
 import io.algostrategy.client.coinex.domain.market.MarketTickerResponse;
+import io.algostrategy.client.coinex.domain.market.OrderBook;
 
 import java.util.Map;
 import java.util.concurrent.CompletableFuture;
@@ -37,4 +38,14 @@ public interface CoinexApiAsyncRestClient {
      * @return market tickers
      */
     CompletableFuture<Response<MarketTickerResponse>> getMarketTickers();
+
+    /**
+     * Get orderbook for the market (asynchronous).
+     *
+     * @param market   market symbol (e.g. BTCUSDT)
+     * @param limit    depth of the order book. Valid limits: [5, 10, 20, 50].
+     * @param aggLevel market depth aggregation level
+     * @return orderbook
+     */
+    CompletableFuture<Response<OrderBook>> getOrderBook(String market, Integer limit, String aggLevel);
 }

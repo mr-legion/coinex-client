@@ -5,6 +5,7 @@ import io.algostrategy.client.coinex.domain.Response;
 import io.algostrategy.client.coinex.domain.general.Asset;
 import io.algostrategy.client.coinex.domain.market.MarketInfo;
 import io.algostrategy.client.coinex.domain.market.MarketTickerResponse;
+import io.algostrategy.client.coinex.domain.market.OrderBook;
 
 import java.util.Map;
 
@@ -36,5 +37,10 @@ public class CoinexApiRestClientImpl implements CoinexApiRestClient {
     @Override
     public Response<MarketTickerResponse> getMarketTickers() {
         return CoinexApiServiceGenerator.executeSync(coinexApiService.getMarketTickers());
+    }
+
+    @Override
+    public Response<OrderBook> getOrderBook(String market, Integer limit, String aggLevel) {
+        return CoinexApiServiceGenerator.executeSync(coinexApiService.getOrderBook(market, limit, aggLevel));
     }
 }
